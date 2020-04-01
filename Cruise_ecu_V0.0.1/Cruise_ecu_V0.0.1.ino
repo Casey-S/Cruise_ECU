@@ -76,7 +76,7 @@ const int numReadings = 160;
 float readings[numReadings];      // the readings from the analog input
 int readIndex = 0;              // the index of the current reading
 double total = 0;                  // the running total
-double average = 0;                // the average
+double average = 100;                // the average
 
 void setup() {
   Serial.begin(9600);
@@ -90,7 +90,7 @@ void setup() {
 
   // start the CAN bus at 500 kbps
   if (!CAN.begin(500E3)) {
-    // Serial.println("Starting CAN failed!");
+     Serial.println("Starting CAN failed!");
     while (1);
   }
 
@@ -153,9 +153,9 @@ void loop() {
   }
 
   // calculate the average:
-  average = total / numReadings;
+  // average = total / numReadings;
   // send it to the computer as ASCII digits
-  //Serial.println(average);
+  Serial.println(average);
   delay(1);
 
 
@@ -173,6 +173,7 @@ void loop() {
   buttonstate1 = digitalRead(pins[1]);
   buttonstate2 = digitalRead(pins[2]);
   buttonstate3 = digitalRead(pins[3]);
+  // Serial.println(buttonstate1);
   gas_pedal_state = 0;
   brake_pedal_state = 0;
 

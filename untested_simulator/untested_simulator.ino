@@ -21,13 +21,13 @@ float ACC_CMD = 0;
 float ACC_CMD1 = 0;
 
 //________________average(current speed in km/h)
-double average = 50;
+double average = 100;
 
 void setup() {
   //________________start the Serial
   Serial.begin(250000);
 
-  CAN.setPins(9, 2);
+  //CAN.setPins(9, 2);
   //________________start the CAN bus at 500 kbps
   if (!CAN.begin(500E3)) {
     Serial.println("Starting CAN failed!");
@@ -39,10 +39,12 @@ void loop() {
   //________________serial read for Buttons
   if (Serial.available() > 0) {
     String s1 = Serial.readStringUntil('\n');
-    if (s1 == "a") {
+    if (s1 == "k") {
+      Serial.println("k pressed");
       flag1 = !flag1;
     }
-    if (s1 == "b") {
+    if (s1 == "l") {
+      Serial.println("l pressed");
       flag2 = !flag2;
     }
   }
@@ -244,11 +246,11 @@ void loop() {
       }
   ACC_CMD_PERCENT = ((100/(maxACC_CMD - minACC_CMD)) * (ACC_CMD1 - minACC_CMD));
     
-  Serial.print("Gas pedal position");
-  Serial.print("__");
-  Serial.print(ACC_CMD_PERCENT);
-  Serial.print("%");
-  Serial.println("");
+//  Serial.print("Gas pedal position");
+//  Serial.print("__");
+//  Serial.print(ACC_CMD_PERCENT);
+//  Serial.print("%");
+//  Serial.println("");
 
 }
 
